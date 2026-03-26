@@ -208,26 +208,27 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col gap-2" onMouseLeave={() => setActiveSwitch(2)}>
           {switches.map((switchItem, i) => {
             const isActive = activeSwitch === i;
             return (
               <div 
                 key={i} 
+                onMouseEnter={() => setActiveSwitch(i)}
                 onClick={() => setActiveSwitch(i)}
-                className={`group flex flex-col md:flex-row md:items-center justify-between py-8 md:py-10 transition-all duration-500 cursor-pointer ${isActive ? 'bg-neutral-950 text-white px-6 md:px-12 -mx-6 md:-mx-12 rounded-[2rem] shadow-2xl my-4' : 'hover:bg-neutral-50 px-6 md:px-12 -mx-6 md:-mx-12 rounded-[2rem] border-b border-neutral-200'}`}
+                className={`group flex flex-col md:flex-row md:items-center justify-between py-8 md:py-10 transition-all duration-500 ease-out cursor-pointer ${isActive ? 'bg-neutral-950 text-white px-6 md:px-12 -mx-6 md:-mx-12 rounded-[2rem] shadow-2xl my-4' : 'hover:bg-neutral-50 px-6 md:px-12 -mx-6 md:-mx-12 rounded-[2rem] border-b border-neutral-200'}`}
               >
                 <div className="flex items-center gap-8 md:gap-16 mb-6 md:mb-0">
-                  <span className={`text-sm font-mono font-medium ${isActive ? 'text-neutral-400' : 'text-neutral-400'}`}>{switchItem.num}</span>
-                  <h4 className="text-4xl md:text-5xl font-medium tracking-tight">{switchItem.name}</h4>
+                  <span className={`text-sm font-mono font-medium transition-colors duration-500 ${isActive ? 'text-neutral-400' : 'text-neutral-400'}`}>{switchItem.num}</span>
+                  <h4 className={`text-4xl md:text-5xl font-medium tracking-tight transition-transform duration-500 ease-out ${isActive ? 'translate-x-2 md:translate-x-4' : 'translate-x-0'}`}>{switchItem.name}</h4>
                 </div>
                 
                 <div className="flex items-center justify-between md:justify-end gap-8 w-full md:w-auto">
                   {/* Image wrapper with smooth expand/collapse */}
-                  <div className={`relative overflow-hidden transition-all duration-500 ease-in-out rounded-2xl shadow-lg ${isActive ? 'w-32 h-20 md:w-56 md:h-32 opacity-100' : 'w-0 h-20 md:h-32 opacity-0'}`}>
-                    <Image src={switchItem.img} alt={switchItem.name} fill className="object-cover" />
+                  <div className={`relative overflow-hidden transition-all duration-500 ease-out rounded-2xl shadow-lg ${isActive ? 'w-32 h-20 md:w-56 md:h-32 opacity-100 scale-100' : 'w-0 h-20 md:h-32 opacity-0 scale-95'}`}>
+                    <Image src={switchItem.img} alt={switchItem.name} fill className="object-cover transition-transform duration-700 ease-out group-hover:scale-110" />
                   </div>
-                  <button className={`w-14 h-14 rounded-full border flex items-center justify-center transition-colors shrink-0 ${isActive ? 'border-neutral-700 text-white hover:bg-white hover:text-neutral-950' : 'border-neutral-300 text-neutral-950 hover:bg-neutral-950 hover:text-white'}`}>
+                  <button className={`w-14 h-14 rounded-full border flex items-center justify-center transition-all duration-500 ease-out shrink-0 ${isActive ? 'border-neutral-700 text-white hover:bg-white hover:text-neutral-950 -rotate-45' : 'border-neutral-300 text-neutral-950 hover:bg-neutral-950 hover:text-white rotate-0'}`}>
                     <ArrowRight size={20} />
                   </button>
                 </div>
